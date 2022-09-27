@@ -1,4 +1,4 @@
-export function drawEnemy(ctx, arr) {
+function drawEnemy(ctx, arr) {
   for (let i = 0; i < arr.length; i++) {
     ctx.beginPath()
     ctx.arc(arr[i].pos.x, arr[i].pos.y, arr[i].radie, 0, Math.PI * 2)
@@ -8,14 +8,14 @@ export function drawEnemy(ctx, arr) {
   }
 }
 
-export function moveEnemy(arr) {
+function moveEnemy(arr) {
   for (let i = 0; i < arr.length; i++) {
     arr[i].pos.x += arr[i].velx
     arr[i].pos.y += arr[i].vely
   }
 }
 
-export function shiftEnemy(arr) {
+function shiftEnemy(arr) {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].pos.x > window.innerWidth * 0.9) {
       arr[i].pos.x -= window.innerWidth * 0.9 - 1
@@ -32,7 +32,7 @@ export function shiftEnemy(arr) {
   }
 }
 
-export function createEnemyBall(arr) {
+function createEnemyBall(arr) {
   let posX
   let posY
   let startPos = Math.floor(Math.random() * 4) + 1
@@ -80,14 +80,34 @@ function EnemyBall(pos, velx, vely, radie, color) {
   return { pos: pos, velx: velx, vely: vely, radie: radie, color: color }
 }
 
-export function touchPlayer(arr, entity) {
+function touchPlayer(arr, entity) {
   for (let i = 0; i < arr.length; i++) {
     let distanceX = (arr[i].pos.x - entity.pos.x) ** 2
     let distanceY = (arr[i].pos.y - entity.pos.y) ** 2
     let distance = Math.sqrt(distanceX + distanceY)
-    if (distance < 10 + entity.ballSize) {
+    if (distance < 10 + entity.ballSize && !entity.godMode) {
       arr.splice(i, 1)
       entity.health -= 1
     }
   }
+}
+
+function touchProtector(arr, entity) {
+  for (let i = 0; i < arr.length; i++) {
+    let distanceX = (arr[i].pos.x - entity.pos.x) ** 2
+    let distanceY = (arr[i].pos.y - entity.pos.y) ** 2
+    let distance = Math.sqrt(distanceX + distanceY)
+    if (distance < 10 + entity.ballSize + 10) {
+      arr.splice(i, 1)
+    }
+  }
+}
+
+export function handleEnemies(enemyarr, ctx, player, prot) {
+  createEnemyBall(enemyarr)
+  moveEnemy(enemyarr)
+  shiftEnemy(enemyarr)
+  drawEnemy(ctx, enemyarr)
+  touchPlayer(enemyarr, player)
+  touchProtector(enemyarr, prot)
 }

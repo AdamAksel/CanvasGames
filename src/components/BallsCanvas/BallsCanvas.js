@@ -1,56 +1,49 @@
-import React, { useEffect, useRef } from 'react'
-import { canvasStyleY, canvasStyleX } from './functions'
+import React, { useRef } from 'react'
 import {
-  draw,
-  movePlayer,
-  shift,
+  canvasStyleY,
+  canvasStyleX,
   handleKeyPressDown,
   handleKeyPressUp,
-} from './player'
-import {
-  drawEnemy,
-  shiftEnemy,
-  moveEnemy,
-  createEnemyBall,
-  touchPlayer,
-} from './enemies'
-import { playerBall } from './data'
+  lifeCounter,
+  useInterval,
+} from './functions'
+import { handlePlayer } from './player'
+import { handleEnemies } from './enemies'
+import { handleProtector } from './protector'
+import { handlePowerUp } from './powerups'
+import { playerBall, protectorCircle } from './data'
 
 const BallsCanvas = () => {
   const canvasRef = useRef(null)
   let moveArray = [false, false, false, false]
   let enemyArray = []
+  let powerArray = []
 
-  useEffect(() => {
-    const render = () => {
-      let start = Date.now()
-      let canvas = canvasRef.current
-      const context = canvas.getContext('2d')
-      context.clearRect(0, 0, canvas.width, canvas.height)
-      document.addEventListener('keydown', (e) => {
-        handleKeyPressDown(e, moveArray)
-      })
-      document.addEventListener('keyup', (e) => {
-        handleKeyPressUp(e, moveArray)
-      })
-      createEnemyBall(enemyArray)
-      moveEnemy(enemyArray)
-      shiftEnemy(enemyArray)
-      drawEnemy(context, enemyArray)
-      touchPlayer(enemyArray, playerBall)
+  const render = () => {
+    let canvas = canvasRef.current
+    const context = canvas.getContext('2d')
+    context.clearRect(0, 0, canvas.width, canvas.height)
+    document.addEventListener('keydown', (e) => {
+      handleKeyPressDown(e, moveArray, protectorCircle)
+    })
 
-      movePlayer(playerBall, moveArray)
-      shift(playerBall)
-      draw(context, playerBall)
+    document.addEventListener('keyup', (e) => {
+      handleKeyPressUp(e, moveArray)
+    })
 
-      let end = Date.now()
-      setTimeout(() => {
-        requestAnimationFrame(render)
-      }, 44 - (start - end))
+    handleEnemies(enemyArray, context, playerBall, protectorCircle)
+    handlePlayer(playerBall, moveArray, context)
+    handleProtector(protectorCircle, context)
+    handlePowerUp(powerArray, playerBall, context)
+    lifeCounter(context, playerBall)
+  }
+
+  useInterval(() => {
+    if (playerBall.health < 1) {
+      return
     }
-
     render()
-  }, [])
+  }, 33)
 
   return (
     <>
