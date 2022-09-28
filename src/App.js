@@ -10,7 +10,6 @@ function App() {
     <StyledApp>
       <GlobalStyle />
       <Main />
-      <div>hello</div>
     </StyledApp>
   )
 }

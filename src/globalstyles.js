@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body {
-        background-color: white;
+        background-color: whitesmoke;
         color: #141c3a;
     }
 
