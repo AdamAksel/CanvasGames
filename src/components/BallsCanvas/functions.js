@@ -37,9 +37,11 @@ export function handleKeyPressDown(e, arr, prot) {
     }
   }
 
-  if (e.key === ' ' && !prot.active) {
+  if (e.key === ' ' && !prot.coolDown) {
     prot.coolDown = true
     prot.active = true
+    prot.coolDownTimer = 400
+    prot.activeTimer = 200
   }
 }
 

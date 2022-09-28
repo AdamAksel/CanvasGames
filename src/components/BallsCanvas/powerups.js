@@ -57,10 +57,12 @@ function powerTouchPlayer(player, arr) {
     player.health = player.health + 1
   } else if (distance < 40 + player.ballSize && arr[0].speedUp) {
     arr.splice(0, 1)
-    player.vel += 2
+    player.vel = 4
+    player.speedUpTimer = 200
   } else if (distance < 40 + player.ballSize && arr[0].godMode) {
     arr.splice(0, 1)
     player.godMode = true
+    player.godModeTimer = 200
   }
 }
 

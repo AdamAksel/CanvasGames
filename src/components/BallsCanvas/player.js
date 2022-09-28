@@ -23,6 +23,19 @@ function movePlayer(entity, arr) {
   }
 }
 
+function powerTimer(player) {
+  if (player.godModeTimer > 0) {
+    player.godModeTimer--
+  } else if (player.godModeTimer === 0) {
+    player.godMode = false
+  }
+  if (player.speedUpTimer > 0) {
+    player.speedUpTimer--
+  } else if (player.speedUpTimer === 0) {
+    player.vel = 2
+  }
+}
+
 function shift(entity) {
   if (entity.pos.x > window.innerWidth * 0.9) {
     entity.pos.x -= window.innerWidth * 0.9 - 1
@@ -38,8 +51,19 @@ function shift(entity) {
   }
 }
 
+function growPlayer(entity) {
+  if (entity.sizeTimer > 0) {
+    entity.sizeTimer--
+  } else if (entity.sizeTimer === 0) {
+    entity.sizeTimer = 33
+    entity.ballSize++
+  }
+}
+
 export function handlePlayer(player, movearr, ctx) {
   movePlayer(player, movearr)
   shift(player)
+  powerTimer(player)
+  growPlayer(player)
   draw(ctx, player)
 }

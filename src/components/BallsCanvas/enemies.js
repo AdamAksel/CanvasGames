@@ -97,7 +97,7 @@ function touchProtector(arr, entity) {
     let distanceX = (arr[i].pos.x - entity.pos.x) ** 2
     let distanceY = (arr[i].pos.y - entity.pos.y) ** 2
     let distance = Math.sqrt(distanceX + distanceY)
-    if (distance < 10 + entity.ballSize + 10) {
+    if (distance < 10 + entity.ballSize + 10 && entity.active) {
       arr.splice(i, 1)
     }
   }

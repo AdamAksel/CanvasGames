@@ -29,13 +29,22 @@ function move(entity) {
   entity.pos.y += entity.deltaY
 }
 
-export function handleProtector(prot, ctx) {
-  if (prot.coolDown === false) {
-    ctx.fillStyle = 'green'
-    ctx.font = '30px Arial'
-    ctx.fillText('Protector is on CoolDown!', (window.innerWidth * 0.9) / 2, 35)
+function protectorTimers(prot) {
+  if (prot.activeTimer > 0) {
+    prot.activeTimer--
+  } else if (prot.activeTimer === 0) {
+    prot.active = false
   }
-  if (prot.active === true) {
+  if (prot.coolDownTimer > 0) {
+    prot.coolDownTimer--
+  } else if (prot.coolDownTimer === 0) {
+    prot.coolDown = false
+  }
+}
+
+export function handleProtector(prot, ctx) {
+  protectorTimers(prot)
+  if (prot.coolDown === false) {
     ctx.fillStyle = 'green'
     ctx.font = '30px Arial'
     ctx.fillText(
@@ -43,7 +52,13 @@ export function handleProtector(prot, ctx) {
       (window.innerWidth * 0.9) / 2,
       35
     )
-
+  }
+  if (prot.coolDown === true) {
+    ctx.fillStyle = 'green'
+    ctx.font = '30px Arial'
+    ctx.fillText('Protector is on CoolDown!', (window.innerWidth * 0.9) / 2, 35)
+  }
+  if (prot.active === true) {
     move(prot)
     bounce(prot)
     draw(prot, ctx)
