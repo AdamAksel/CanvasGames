@@ -45,34 +45,6 @@ export function handleKeyPressDown(e, arr, prot) {
   }
 }
 
-/*
- setTimeout(() => {
-      setTimeout(() => {
-        prot.pos.x = Math.floor(Math.random() * (window.innerWidth * 0.7)) + 100
-        prot.pos.y =
-          Math.floor(Math.random() * (window.innerHeight * 0.7)) + 100
-        protcooldown = false
-      }, 5000)
-
-      protactive = false
-    }, 10000)
-
-     if (protectorActive) {
-      useTimeout(() => {
-        protectorActive = false
-      }, 10000)
-    }
-    if (protectorActive) {
-      useTimeout(() => {
-        protectorCircle.pos.x =
-          Math.floor(Math.random() * (window.innerWidth * 0.7)) + 100
-        protectorCircle.pos.y =
-          Math.floor(Math.random() * (window.innerHeight * 0.7)) + 100
-        protectorCooldown = false
-      }, 15000)
-    }
-*/
-
 export function handleKeyPressUp(e, arr) {
   if (e.key === 'w') {
     arr[0] = false
