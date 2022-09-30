@@ -5,6 +5,8 @@ import {
   useInterval,
   handleKeyPressDown,
   handleKeyPressUp,
+  drawScoreText,
+  drawMiddleLine,
 } from './functions'
 import { handlePlayers } from './players'
 import { handleBall } from './ball'
@@ -26,8 +28,10 @@ const Pong = () => {
     document.addEventListener('keyup', (e) => {
       handleKeyPressUp(e, moveArray1, moveArray2)
     })
-    handlePlayers(context, player1, player2, moveArray1, moveArray2)
-    handleBall(context, pongBall, player1, player2)
+    drawScoreText(context, player1, player2, canvas)
+    drawMiddleLine(context, canvas)
+    handlePlayers(context, player1, player2, moveArray1, moveArray2, canvas)
+    handleBall(context, pongBall, player1, player2, canvas)
   }
 
   useInterval(() => {

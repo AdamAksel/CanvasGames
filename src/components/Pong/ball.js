@@ -21,23 +21,22 @@ function bounceWall(entity) {
   }
 }
 
-function restartBall(entity, player1, player2) {
-  if (entity.pos.x + entity.size > window.innerWidth * 0.9) {
-    player2.health -= 1
-    entity.pos.x = (window.innerWidth * 0.9) / 2
-    entity.pos.y = (window.innerHeight * 0.9) / 2
+function restartBall(entity, player1, player2, canvas) {
+  if (entity.pos.x + entity.size > canvas.width) {
+    player1.score += 1
+    entity.velX = 8
+    entity.pos.x = canvas.width / 2
+    entity.pos.y = canvas.height / 2
     entity.velY = entity.velY * -1
     entity.velX = entity.velX * -1
   }
-  if (
-    entity.pos.x + entity.size <
-    window.innerWidth * 0.9 - window.innerWidth * 0.9
-  ) {
-    player1.health -= 1
+  if (entity.pos.x + entity.size < canvas.width - canvas.width) {
+    player2.score += 1
+    entity.velX = -8
     entity.velY = entity.velY * -1
     entity.velX = entity.velX * -1
-    entity.pos.x = (window.innerWidth * 0.9) / 2
-    entity.pos.y = (window.innerHeight * 0.9) / 2
+    entity.pos.x = canvas.width / 2
+    entity.pos.y = canvas.height / 2
   }
 }
 
@@ -47,11 +46,11 @@ function bouncePlayer(entity, player1, player2) {
   let distance1 = Math.sqrt(distanceX1 + distanceY1)
   //serious collision problems
   if (
-    (distance1 < 50 || distance1 < -50) &&
-    distanceX1 < 10 &&
+    distance1 < 100 &&
+    distanceX1 < 100 &&
+    entity.pos.y > player1.pos.y &&
     entity.bounceTimer === 0
   ) {
-    console.log(distance1, distanceX1)
     entity.velX = entity.velX * -1
     entity.bounceTimer = 20
   }
@@ -59,7 +58,12 @@ function bouncePlayer(entity, player1, player2) {
   let distanceY2 = (entity.pos.y - player2.pos.y) ** 2
   let distance2 = Math.sqrt(distanceX2 + distanceY2)
 
-  if (distance2 < 100 && distanceX2 < 10 && entity.bounceTimer === 0) {
+  if (
+    distance2 < 100 &&
+    distanceX2 < 100 &&
+    entity.pos.y > player2.pos.y &&
+    entity.bounceTimer === 0
+  ) {
     entity.velX = entity.velX * -1
     entity.bounceTimer = 20
   }
@@ -68,14 +72,21 @@ function bouncePlayer(entity, player1, player2) {
 function ballTimer(entity) {
   if (entity.bounceTimer > 0) {
     entity.bounceTimer--
+    if (entity.bounceTimer === 5) {
+      if (entity.velX < 0) {
+        entity.velX--
+      } else {
+        entity.velX++
+      }
+    }
   }
 }
 
-export function handleBall(ctx, entity, player1, player2) {
+export function handleBall(ctx, entity, player1, player2, canvas) {
   ballTimer(entity)
   moveBall(entity)
   bounceWall(entity)
   bouncePlayer(entity, player1, player2)
-  restartBall(entity, player1, player2)
+  restartBall(entity, player1, player2, canvas)
   drawBall(ctx, entity)
 }

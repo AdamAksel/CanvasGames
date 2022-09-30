@@ -56,3 +56,19 @@ export function handleKeyPressUp(e, arr1, arr2) {
     arr2[1] = false
   }
 }
+
+export function drawScoreText(ctx, player1, player2, canvas) {
+  ctx.fillStyle = 'black'
+  ctx.font = '20px Arial'
+  ctx.fillText(player2.score, canvas.width - 30, 35)
+  ctx.fillText(player1.score, 20, 35)
+}
+
+export function drawMiddleLine(ctx, canvas) {
+  ctx.beginPath()
+  ctx.fillStyle = 'whitesmoke'
+  for (let i = 5; i < canvas.height; i = i + 50) {
+    ctx.fillRect(canvas.width / 2 - 3, i, 5, 35)
+  }
+  ctx.closePath()
+}
