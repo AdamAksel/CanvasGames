@@ -1,41 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   RulesArea,
   RulesHalfArea,
   RulesButton,
   RulesText,
 } from './PongRules.elements'
+import Pong from '../../Pong/Pong'
 
-const BallsCanvasRules = (props) => {
-  const { rules, setRules } = props
+const BallsCanvasRules = () => {
+  const [rules, setRules] = useState(true)
   return (
     <>
-      <RulesArea>
-        <RulesHalfArea>
-          <RulesText>PlaceHolder</RulesText>
+      {rules ? (
+        <RulesArea>
+          <RulesHalfArea>
+            <RulesText>PlaceHolder</RulesText>
 
-          <RulesText>PlaceHolder</RulesText>
+            <RulesText>PlaceHolder</RulesText>
 
-          <RulesText>PlaceHolder</RulesText>
+            <RulesText>PlaceHolder</RulesText>
 
-          <RulesText>PlaceHolder</RulesText>
+            <RulesText>PlaceHolder</RulesText>
 
-          <RulesText>PlaceHolder</RulesText>
+            <RulesText>PlaceHolder</RulesText>
 
-          <RulesText>PlaceHolder</RulesText>
+            <RulesText>PlaceHolder</RulesText>
 
-          <RulesText>PlaceHolder</RulesText>
-        </RulesHalfArea>
-        <RulesHalfArea>
-          <RulesButton
-            onClick={() => {
-              setRules(!rules)
-            }}
-          >
-            <RulesText>Ready?</RulesText>
-          </RulesButton>
-        </RulesHalfArea>
-      </RulesArea>
+            <RulesText>PlaceHolder</RulesText>
+          </RulesHalfArea>
+          <RulesHalfArea>
+            <RulesButton
+              onClick={() => {
+                setRules(!rules)
+              }}
+            >
+              <RulesText>Ready?</RulesText>
+            </RulesButton>
+          </RulesHalfArea>
+        </RulesArea>
+      ) : (
+        <Pong />
+      )}
     </>
   )
 }
