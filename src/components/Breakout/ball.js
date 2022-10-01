@@ -27,6 +27,8 @@ function bounceWall(entity, canvas) {
 }
 
 function bouncePlayer(entity, player) {
+  let distanceXSimple = entity.pos.x - player.pos.x
+  let bounceDirection = Math.floor(distanceXSimple - 100) / 3.5
   let distanceX = (entity.pos.x - player.pos.x) ** 2
   let distanceY = (entity.pos.y - player.pos.y) ** 2
   let distance = Math.sqrt(distanceX + distanceY)
@@ -36,8 +38,9 @@ function bouncePlayer(entity, player) {
     entity.pos.x > player.pos.x &&
     entity.bounceTimer === 0
   ) {
-    console.log(distance, distanceY, entity.pos.x, player.pos.x)
+    console.log(bounceDirection)
     entity.velY = entity.velY * -1
+    entity.velX = bounceDirection
     entity.bounceTimer = 20
   }
 }
@@ -45,13 +48,6 @@ function bouncePlayer(entity, player) {
 function ballTimer(entity) {
   if (entity.bounceTimer > 0) {
     entity.bounceTimer--
-    if (entity.bounceTimer === 5) {
-      if (entity.velX < 0) {
-        entity.velX--
-      } else {
-        entity.velX++
-      }
-    }
   }
 }
 
