@@ -23,8 +23,7 @@ export const RulesButton = styled.div`
   align-items: center;
   width: 10%;
   height: 10%;
-  border: 1px black solid;
-  padding-bottom: 10px;
+
   :hover {
     color: lightblue;
     cursor: pointer;

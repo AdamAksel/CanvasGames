@@ -19,6 +19,10 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 10px;
     
   }
+  a:-webkit-any-link {
+  text-decoration: none;
+  color: inherit;
+}
 
 }
 
