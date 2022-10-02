@@ -9,6 +9,12 @@ function movePlayer(entity, arr, canvas) {
   }
 }
 
+function bounceTimer(entity) {
+  if (entity.bounceTimer > 0) {
+    entity.bounceTimer--
+  }
+}
+
 function draw(ctx, entity) {
   ctx.beginPath()
   ctx.fillStyle = entity.color
@@ -18,5 +24,6 @@ function draw(ctx, entity) {
 
 export function handlePlayer(ctx, entity, arr, canvas) {
   movePlayer(entity, arr, canvas)
+  bounceTimer(entity)
   draw(ctx, entity, canvas)
 }

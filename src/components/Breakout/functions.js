@@ -44,3 +44,17 @@ export function handleKeyPressUp(e, arr1) {
     arr1[1] = false
   }
 }
+
+export function lifeAndStageCounter(ctx, canvas, player) {
+  ctx.fillStyle = 'black'
+  ctx.font = '20px Arial'
+  ctx.fillText('Stage: ' + player.stage, 10, canvas.height - 50)
+  if (player.lives === 0) {
+    return ctx.fillText(
+      'Lives: ' + player.lives + ', You are Dead!',
+      10,
+      canvas.height - 20
+    )
+  }
+  ctx.fillText('Lives: ' + player.lives, 10, canvas.height - 20)
+}

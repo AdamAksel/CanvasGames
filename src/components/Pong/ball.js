@@ -44,7 +44,7 @@ function bouncePlayer(entity, player1, player2) {
   let distanceX1 = (entity.pos.x - player1.pos.x) ** 2
   let distanceY1 = (entity.pos.y - player1.pos.y) ** 2
   let distance1 = Math.sqrt(distanceX1 + distanceY1)
-  //serious collision problems
+ 
   if (
     distance1 < 100 &&
     distanceX1 < 100 &&

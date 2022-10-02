@@ -11,18 +11,25 @@ function moveBall(entity) {
   entity.pos.y += entity.velY
 }
 
-function bounceWall(entity, canvas) {
-  if (
-    entity.pos.y + entity.size > canvas.height ||
-    entity.pos.y - entity.size < canvas.height - canvas.height
-  ) {
+function bounceWall(entity, canvas, player) {
+  if (entity.pos.y - entity.size < canvas.height - canvas.height) {
+    entity.bounceTimer = 10
     entity.velY = entity.velY * -1
   }
   if (
     entity.pos.x + entity.size > canvas.width ||
     entity.pos.x - entity.size < canvas.width - canvas.width
   ) {
+    entity.bounceTimer = 10
     entity.velX = entity.velX * -1
+  }
+  if (entity.pos.y + entity.size > canvas.height) {
+    entity.velY = entity.velY * -1
+    entity.pos.y = player.pos.y - 20
+    entity.pos.x = player.pos.x + 100
+    player.bounceTimer = 10
+    entity.velX = 0
+    player.lives--
   }
 }
 
@@ -36,25 +43,17 @@ function bouncePlayer(entity, player) {
     distance < 200 &&
     distanceY < 200 &&
     entity.pos.x > player.pos.x &&
-    entity.bounceTimer === 0
+    player.bounceTimer === 0
   ) {
-    console.log(bounceDirection)
     entity.velY = entity.velY * -1
     entity.velX = bounceDirection
-    entity.bounceTimer = 20
-  }
-}
-
-function ballTimer(entity) {
-  if (entity.bounceTimer > 0) {
-    entity.bounceTimer--
+    player.bounceTimer = 20
   }
 }
 
 export function handleBall(ctx, entity, player, canvas) {
-  ballTimer(entity)
   moveBall(entity)
-  bounceWall(entity, canvas)
+  bounceWall(entity, canvas, player)
   bouncePlayer(entity, player)
 
   drawBall(ctx, entity)
