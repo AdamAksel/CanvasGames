@@ -74,7 +74,7 @@ function drawBricks(ctx, arr) {
   }
 }
 
-function brickCollision(arr, ball) {
+function brickCollisionY(arr, ball) {
   for (let i = 0; i < arr.length; i++) {
     if (
       (ball.velY < 0 &&
@@ -86,11 +86,37 @@ function brickCollision(arr, ball) {
       (ball.velY > 0 &&
         ball.pos.x > arr[i].bottomLeft[0] &&
         ball.pos.x < arr[i].bottomRight[0] &&
-        ball.pos.y + 30 > arr[i].bottomLeft[1] &&
-        ball.pos.y < arr[i].topLeft[1] - 30 &&
+        ball.pos.y + 40 > arr[i].bottomLeft[1] &&
+        ball.pos.y < arr[i].topLeft[1] - 10 &&
         arr[i].bounceTimer === 0)
     ) {
       ball.velY = ball.velY * -1
+      arr[i].bounceTimer = 10
+      arr[i].lives--
+      if (arr[i].lives === 0) {
+        arr.splice(i, 1)
+      }
+    }
+  }
+}
+
+function brickCollisionX(arr, ball) {
+  for (let i = 0; i < arr.length; i++) {
+    if (
+      (ball.velX < 0 &&
+        ball.pos.y - 10 < arr[i].topLeft[1] &&
+        ball.pos.y + 10 > arr[i].bottomLeft[1] &&
+        ball.pos.x > arr[i].bottomRight[0] - 10 &&
+        ball.pos.x < arr[i].bottomRight[0] + 10 &&
+        arr[i].bounceTimer === 0) ||
+      (ball.velX > 0 &&
+        ball.pos.y - 10 < arr[i].topLeft[1] &&
+        ball.pos.y + 10 > arr[i].bottomLeft[1] &&
+        ball.pos.x > arr[i].bottomLeft[0] - 10 &&
+        ball.pos.x < arr[i].bottomLeft[0] + 10 &&
+        arr[i].bounceTimer === 0)
+    ) {
+      ball.velX = ball.velX * -1
       arr[i].bounceTimer = 10
       arr[i].lives--
       if (arr[i].lives === 0) {
@@ -114,6 +140,7 @@ export function handleBricks(ctx, canvas, arr, ball, player) {
     brickLayer(canvas, arr)
   }
   bounceTimer(arr)
-  brickCollision(arr, ball)
+  brickCollisionY(arr, ball)
+  brickCollisionX(arr, ball)
   drawBricks(ctx, arr)
 }

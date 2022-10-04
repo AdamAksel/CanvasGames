@@ -3,6 +3,7 @@ import { GameContainer, NavContainer, NavArea, NavItem } from './Main.elements'
 import BallsCanvasRules from '../Rules/BallsCanvasRules/BallsCanvasRules'
 import PongRules from '../Rules/PongRules/PongRules'
 import BreakoutRules from '../Rules/BreakoutRules/BreakoutRules'
+import Home from '../Rules/Home/Home'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 
 const Main = () => {
@@ -16,6 +17,7 @@ const Main = () => {
     <>
       <GameContainer>
         <Routes>
+          <Route exact path='/' element={<Home />} />
           <Route exact path='/Ballsurvival' element={<BallsCanvasRules />} />
           <Route exact path='/Pong' element={<PongRules />} />
           <Route exact path='/Breakout' element={<BreakoutRules />} />
@@ -46,7 +48,13 @@ const Main = () => {
           >
             <Link to='/Breakout'>Breakout</Link>
           </NavItem>
-          <NavItem>Future Game 2</NavItem>
+          <NavItem
+            onClick={() => {
+              refreshPage()
+            }}
+          >
+            <Link to='/'>Back To Home</Link>
+          </NavItem>
         </NavArea>
       </NavContainer>
     </>
