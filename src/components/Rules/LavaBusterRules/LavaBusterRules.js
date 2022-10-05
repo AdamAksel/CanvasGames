@@ -5,20 +5,20 @@ import {
   RulesButton,
   RulesText,
   RulesTop,
-} from './BallsCanvasRules.elements'
-import BallsCanvas from '../../BallsCanvas/BallsCanvas'
+} from './LavaBusterRules.elements'
+import LavaBuster from '../../LavaBuster/LavaBuster'
 
-const BallsCanvasRules = () => {
+const LavaBusterRules = () => {
   const [rules, setRules] = useState(true)
   return (
     <>
       {rules ? (
         <RulesArea>
           <RulesHalfArea>
-            <RulesTop>Rules for BallSurvival</RulesTop>
+            <RulesTop>Rules for LavaBuster</RulesTop>
             <ul>
               <li>Move with W A S D</li>
-              <li>Press SpaceBar to get a helping hand</li>
+              <li>Press SpaceBar to Shoot at LavaBalls</li>
               <li>Collect PowerUps</li>
               <li>Red is Health</li>
               <li>Blue is Temporary Speed</li>
@@ -36,10 +36,10 @@ const BallsCanvasRules = () => {
           </RulesHalfArea>
         </RulesArea>
       ) : (
-        <BallsCanvas />
+        <LavaBuster />
       )}
     </>
   )
 }
 
-export default BallsCanvasRules
+export default LavaBusterRules

@@ -84,8 +84,8 @@ function brickCollisionY(arr, ball) {
         ball.pos.y < arr[i].topLeft[1] - 10 &&
         arr[i].bounceTimer === 0) ||
       (ball.velY > 0 &&
-        ball.pos.x > arr[i].bottomLeft[0] &&
-        ball.pos.x < arr[i].bottomRight[0] &&
+        ball.pos.x > arr[i].topLeft[0] &&
+        ball.pos.x < arr[i].topRight[0] &&
         ball.pos.y + 40 > arr[i].bottomLeft[1] &&
         ball.pos.y < arr[i].topLeft[1] - 10 &&
         arr[i].bounceTimer === 0)
@@ -93,6 +93,9 @@ function brickCollisionY(arr, ball) {
       ball.velY = ball.velY * -1
       arr[i].bounceTimer = 10
       arr[i].lives--
+      if (arr[i].lives === 1) {
+        arr[i].color = 'red'
+      }
       if (arr[i].lives === 0) {
         arr.splice(i, 1)
       }
@@ -104,21 +107,24 @@ function brickCollisionX(arr, ball) {
   for (let i = 0; i < arr.length; i++) {
     if (
       (ball.velX < 0 &&
-        ball.pos.y - 10 < arr[i].topLeft[1] &&
-        ball.pos.y + 10 > arr[i].bottomLeft[1] &&
-        ball.pos.x > arr[i].bottomRight[0] - 10 &&
+        ball.pos.y - 10 < arr[i].topRight[1] &&
+        ball.pos.y + 10 > arr[i].bottomRight[1] &&
+        ball.pos.x > arr[i].bottomRight[0] - 40 &&
         ball.pos.x < arr[i].bottomRight[0] + 10 &&
         arr[i].bounceTimer === 0) ||
       (ball.velX > 0 &&
         ball.pos.y - 10 < arr[i].topLeft[1] &&
         ball.pos.y + 10 > arr[i].bottomLeft[1] &&
         ball.pos.x > arr[i].bottomLeft[0] - 10 &&
-        ball.pos.x < arr[i].bottomLeft[0] + 10 &&
+        ball.pos.x < arr[i].bottomLeft[0] + 40 &&
         arr[i].bounceTimer === 0)
     ) {
       ball.velX = ball.velX * -1
       arr[i].bounceTimer = 10
       arr[i].lives--
+      if (arr[i].lives === 1) {
+        arr[i].color = 'red'
+      }
       if (arr[i].lives === 0) {
         arr.splice(i, 1)
       }
