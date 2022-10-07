@@ -5,11 +5,13 @@ import {
   handleKeyPressDown,
   handleKeyPressUp,
   useInterval,
+  scoreCounter,
 } from './functions'
 import { playerBall } from './data'
 import { handlePlayer } from './player'
 import { handleBullets } from './bullets'
 import { handleEnemies } from './enemies'
+import { handlePowerUps } from './powerups'
 
 const LavaBuster = () => {
   const canvasRef = useRef(null)
@@ -28,12 +30,17 @@ const LavaBuster = () => {
     document.addEventListener('keyup', (e) => {
       handleKeyPressUp(e, moveArray)
     })
-    handlePlayer(context, playerBall, moveArray)
+    scoreCounter(context, playerBall)
+    handlePlayer(context, playerBall, moveArray, canvas)
     handleBullets(context, moveArray, playerBall, bulletArray)
     handleEnemies(context, enemyArray, playerBall, canvas, bulletArray)
+    handlePowerUps(context, powerArray, playerBall, canvas)
   }
 
   useInterval(() => {
+    if (playerBall.health < 1) {
+      return
+    }
     render()
   }, 33)
 

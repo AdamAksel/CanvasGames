@@ -4,6 +4,7 @@ import {
   RulesHalfArea,
   RulesButton,
   RulesText,
+  RulesTop,
 } from './BreakoutRules.elements'
 import Breakout from '../../Breakout/Breakout'
 
@@ -14,28 +15,22 @@ const BallsCanvasRules = () => {
       {rules ? (
         <RulesArea>
           <RulesHalfArea>
-            <RulesText>PlaceHolder</RulesText>
+            <RulesTop>Rules for Breakout</RulesTop>
+            <ul>
+              <li>Move with A and D</li>
+              <li>Bounce ball at rectangles</li>
+              <li>Don't let the ball touch the floor</li>
+            </ul>
 
-            <RulesText>PlaceHolder</RulesText>
-
-            <RulesText>PlaceHolder</RulesText>
-
-            <RulesText>PlaceHolder</RulesText>
-
-            <RulesText>PlaceHolder</RulesText>
-
-            <RulesText>PlaceHolder</RulesText>
-
-            <RulesText>PlaceHolder</RulesText>
-          </RulesHalfArea>
-          <RulesHalfArea>
-            <RulesButton
-              onClick={() => {
-                setRules(!rules)
-              }}
-            >
-              <RulesText>Ready?</RulesText>
-            </RulesButton>
+            <RulesTop>
+              <RulesButton
+                onClick={() => {
+                  setRules(!rules)
+                }}
+              >
+                <RulesText>Ready? Click Here</RulesText>
+              </RulesButton>
+            </RulesTop>
           </RulesHalfArea>
         </RulesArea>
       ) : (

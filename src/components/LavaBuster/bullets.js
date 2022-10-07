@@ -17,7 +17,11 @@ function shootTimer(entity) {
 }
 
 function createBullet(arrM, entity, arrB) {
-  if (arrM[2] && entity.shootTimer === 0) {
+  if (
+    arrM[2] &&
+    entity.shootTimer === 0 &&
+    (arrB.length < 3 || entity.rapidFireTimer > 0)
+  ) {
     arrB.push(
       new Bullet(
         { x: entity.pos.x, y: entity.pos.y - 35 },
@@ -26,7 +30,15 @@ function createBullet(arrM, entity, arrB) {
         'rgb(0,0,255)'
       )
     )
-    entity.shootTimer = 20
+    entity.shootTimer = 5
+  }
+}
+
+function bulletTopSplice(arrB) {
+  for (let i = 0; i < arrB.length; i++) {
+    if (arrB[i].pos.y < 0) {
+      arrB.splice(i, 1)
+    }
   }
 }
 
@@ -45,4 +57,5 @@ export function handleBullets(ctx, arrM, entity, arrB) {
   shootTimer(entity)
   drawBullet(ctx, arrB)
   createBullet(arrM, entity, arrB)
+  bulletTopSplice(arrB)
 }

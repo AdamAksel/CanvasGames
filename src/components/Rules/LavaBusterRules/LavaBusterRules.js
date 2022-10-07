@@ -17,11 +17,11 @@ const LavaBusterRules = () => {
           <RulesHalfArea>
             <RulesTop>Rules for LavaBuster</RulesTop>
             <ul>
-              <li>Move with W A S D</li>
-              <li>Press SpaceBar to Shoot at LavaBalls</li>
+              <li>Move with A and D</li>
+              <li>Press "L" to Shoot at LavaBalls</li>
               <li>Collect PowerUps</li>
               <li>Red is Health</li>
-              <li>Blue is Temporary Speed</li>
+              <li>Blue is Temporary Rapid Fire</li>
               <li>Green is Temporary GodMode</li>
             </ul>
             <RulesTop>

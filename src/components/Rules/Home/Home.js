@@ -7,7 +7,8 @@ const Home = () => {
       <RulesArea>
         <h3>
           Hello. <br />
-          I made a few canvas games <br /> to learn how to do it. <br />
+          I made a few canvas games <br /> Please try them. <br /> My favorite
+          is LavaBuster!
         </h3>
       </RulesArea>
     </>

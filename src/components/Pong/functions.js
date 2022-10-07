@@ -28,31 +28,31 @@ export function useInterval(callback, delay) {
 }
 
 export function handleKeyPressDown(e, arr1, arr2) {
-  if (e.key === 'w') {
+  if (e.key === 'w' || e.key === 'W') {
     arr1[0] = true
   }
-  if (e.key === 's') {
+  if (e.key === 's' || e.key === 'S') {
     arr1[1] = true
   }
-  if (e.key === 'o') {
+  if (e.key === 'o' || e.key === 'O') {
     arr2[0] = true
   }
-  if (e.key === 'l') {
+  if (e.key === 'l' || e.key === 'L') {
     arr2[1] = true
   }
 }
 
 export function handleKeyPressUp(e, arr1, arr2) {
-  if (e.key === 'w') {
+  if (e.key === 'w' || e.key === 'W') {
     arr1[0] = false
   }
-  if (e.key === 's') {
+  if (e.key === 's' || e.key === 'S') {
     arr1[1] = false
   }
-  if (e.key === 'o') {
+  if (e.key === 'o' || e.key === 'O') {
     arr2[0] = false
   }
-  if (e.key === 'l') {
+  if (e.key === 'l' || e.key === 'L') {
     arr2[1] = false
   }
 }

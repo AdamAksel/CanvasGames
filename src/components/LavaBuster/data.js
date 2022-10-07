@@ -6,4 +6,8 @@ export const playerBall = {
   vel: 4,
   shootTimer: 10,
   enemyTimer: 30,
+  godMode: 0,
+  score: 0,
+  powerTimer: 500,
+  rapidFireTimer: 0,
 }

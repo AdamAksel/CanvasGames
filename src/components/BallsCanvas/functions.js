@@ -12,25 +12,25 @@ export function canvasStyleX(windowX) {
 //functions to handle key presses
 
 export function handleKeyPressDown(e, arr, prot) {
-  if (e.key === 'w') {
+  if (e.key === 'w' || e.key === 'W') {
     arr[0] = true
     if (!prot.active) {
       prot.deltaY = -4
     }
   }
-  if (e.key === 's') {
+  if (e.key === 's' || e.key === 'S') {
     arr[1] = true
     if (!prot.active) {
       prot.deltaY = 4
     }
   }
-  if (e.key === 'a') {
+  if (e.key === 'a' || e.key === 'A') {
     arr[2] = true
     if (!prot.active) {
       prot.deltaX = -4
     }
   }
-  if (e.key === 'd') {
+  if (e.key === 'd' || e.key === 'D') {
     arr[3] = true
     if (!prot.active) {
       prot.deltaX = 4
@@ -46,22 +46,23 @@ export function handleKeyPressDown(e, arr, prot) {
 }
 
 export function handleKeyPressUp(e, arr) {
-  if (e.key === 'w') {
+  if (e.key === 'w' || e.key === 'W') {
     arr[0] = false
   }
-  if (e.key === 's') {
+  if (e.key === 's' || e.key === 'S') {
     arr[1] = false
   }
-  if (e.key === 'a') {
+  if (e.key === 'a' || e.key === 'A') {
     arr[2] = false
   }
-  if (e.key === 'd') {
+  if (e.key === 'd' || e.key === 'D') {
     arr[3] = false
   }
 }
 
 export function lifeCounter(ctx, player) {
   ctx.fillStyle = 'red'
+  ctx.textAlign = 'start'
   ctx.font = '30px Arial'
   if (player.health < 1) {
     ctx.fillText('Lives: ' + player.health, 10, 35)

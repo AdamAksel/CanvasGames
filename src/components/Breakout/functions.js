@@ -28,19 +28,19 @@ export function useInterval(callback, delay) {
 }
 
 export function handleKeyPressDown(e, arr1) {
-  if (e.key === 'a') {
+  if (e.key === 'a' || e.key === 'A') {
     arr1[0] = true
   }
-  if (e.key === 'd') {
+  if (e.key === 'd' || e.key === 'D') {
     arr1[1] = true
   }
 }
 
 export function handleKeyPressUp(e, arr1) {
-  if (e.key === 'a') {
+  if (e.key === 'a' || e.key === 'A') {
     arr1[0] = false
   }
-  if (e.key === 'd') {
+  if (e.key === 'd' || e.key === 'D') {
     arr1[1] = false
   }
 }

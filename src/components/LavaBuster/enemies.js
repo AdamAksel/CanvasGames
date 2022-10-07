@@ -4,6 +4,10 @@ function drawEnemy(ctx, arr) {
     ctx.arc(arr[i].pos.x, arr[i].pos.y, arr[i].radie, 0, Math.PI * 2)
     ctx.fillStyle = arr[i].color
     ctx.fill()
+    ctx.arc(arr[i].pos.x, arr[i].pos.y, arr[i].radie - 1, 0, Math.PI * 2)
+    ctx.strokeStyle = 'black'
+    ctx.lineWidth = 1
+    ctx.stroke()
     ctx.closePath()
   }
 }
@@ -13,21 +17,23 @@ function EnemyBall(pos, velx, vely, radie, color) {
 }
 
 function createEnemyBall(arr, player, canvas) {
-  if (player.enemyTimer === 0) {
-    arr.push(
-      new EnemyBall(
-        { x: Math.floor(Math.random() * (canvas.width * 0.7)) + 100, y: 0 },
-        arr.length % 2 === 0 ? 3 : -3,
-        1,
-        Math.floor(Math.random() * 100) + 5,
-        'rgb(255,0,0)'
-      )
-    )
-    player.enemyTimer = 150
+  if (player.enemyTimer > 0) {
+    return null
   }
+
+  arr.push(
+    new EnemyBall(
+      { x: Math.floor(Math.random() * (canvas.width * 0.7)) + 100, y: 0 },
+      arr.length % 2 === 0 ? 3 : -3,
+      1,
+      Math.floor(Math.random() * 80) + 20,
+      'rgb(255,0,0)'
+    )
+  )
+  player.enemyTimer = 150
 }
 
-function enemyAndBulletCollision(arrB, arrE) {
+function enemyAndBulletCollision(arrB, arrE, player) {
   if (arrB.length === 0 || arrE.length === 0) {
     return null
   }
@@ -37,8 +43,9 @@ function enemyAndBulletCollision(arrB, arrE) {
       let distanceX = (arrB[i].pos.x - arrE[j].pos.x) ** 2
       let distanceY = (arrB[i].pos.y - arrE[j].pos.y) ** 2
       let distance = Math.sqrt(distanceX + distanceY)
-      if (distance < arrE[j].radie) {
+      if (distance < arrE[j].radie + 5) {
         arrB.splice(i, 1)
+        player.score++
         if (arrE[j].radie > 25) {
           arrE.push(
             new EnemyBall(
@@ -69,17 +76,31 @@ function enemyAndBulletCollision(arrB, arrE) {
   }
 }
 
-function moveEnemy(arr, canvas) {
+function enemyAndPlayerCollision(entity, arrE) {
+  if (arrE.length === 0) {
+    return null
+  }
+  for (let i = 0; i < arrE.length; i++) {
+    let distanceX = (entity.pos.x - arrE[i].pos.x) ** 2
+    let distanceY = (entity.pos.y - arrE[i].pos.y) ** 2
+    let distance = Math.sqrt(distanceX + distanceY)
+    if (distance < arrE[i].radie + entity.ballSize && entity.godMode === 0) {
+      entity.health--
+      return (entity.godMode = 30)
+    }
+  }
+}
+
+function moveEnemy(arr) {
   if (arr.length === 0) {
     return null
   }
-  console.log(arr)
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i].vely > 0) {
-      arr[i].vely += 0.29
+    if (arr[i].vely > 0 && arr[i].vely < 18) {
+      arr[i].vely += 0.3
     }
     if (arr[i].vely < 0) {
-      arr[i].vely += 0.3
+      arr[i].vely += 0.29
     }
 
     arr[i].pos.x += arr[i].velx
@@ -104,7 +125,8 @@ function bounceEnemy(arr, canvas) {
 export function handleEnemies(ctx, arrE, player, canvas, arrB) {
   createEnemyBall(arrE, player, canvas)
   bounceEnemy(arrE, canvas)
-  moveEnemy(arrE, canvas)
+  moveEnemy(arrE)
   drawEnemy(ctx, arrE)
-  enemyAndBulletCollision(arrB, arrE)
+  enemyAndBulletCollision(arrB, arrE, player)
+  enemyAndPlayerCollision(player, arrE)
 }

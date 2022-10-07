@@ -3,7 +3,7 @@ import { GameContainer, NavContainer, NavArea, NavItem } from './Main.elements'
 import BallsCanvasRules from '../Rules/BallsCanvasRules/BallsCanvasRules'
 import PongRules from '../Rules/PongRules/PongRules'
 import BreakoutRules from '../Rules/BreakoutRules/BreakoutRules'
-import LavaBusterRules from '../LavaBuster/LavaBuster'
+import LavaBusterRules from '../Rules/LavaBusterRules/LavaBusterRules'
 import Home from '../Rules/Home/Home'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 

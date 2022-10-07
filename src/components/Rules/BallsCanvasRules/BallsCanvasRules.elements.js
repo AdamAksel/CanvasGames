@@ -13,7 +13,7 @@ export const RulesTop = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 90%;
   height: 10%;
   font-size: 2rem;
   margin: 10px;

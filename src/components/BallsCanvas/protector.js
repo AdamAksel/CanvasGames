@@ -44,9 +44,11 @@ function protectorTimers(prot) {
 
 export function handleProtector(prot, ctx) {
   protectorTimers(prot)
+  ctx.textAlign = 'center'
   if (prot.coolDown === false) {
     ctx.fillStyle = 'green'
     ctx.font = '30px Arial'
+
     ctx.fillText(
       'Protector Circle is ready, press Space to feel Safe!',
       (window.innerWidth * 0.9) / 2,
