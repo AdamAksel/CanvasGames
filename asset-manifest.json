@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/CanvasGames/static/css/main.e6c13ad2.css",
+    "main.js": "/CanvasGames/static/js/main.f804f61d.js",
+    "static/js/787.03cf9c22.chunk.js": "/CanvasGames/static/js/787.03cf9c22.chunk.js",
+    "index.html": "/CanvasGames/index.html",
+    "main.e6c13ad2.css.map": "/CanvasGames/static/css/main.e6c13ad2.css.map",
+    "main.f804f61d.js.map": "/CanvasGames/static/js/main.f804f61d.js.map",
+    "787.03cf9c22.chunk.js.map": "/CanvasGames/static/js/787.03cf9c22.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.f804f61d.js"
+  ]
+}
