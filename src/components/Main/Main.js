@@ -18,7 +18,7 @@ const Main = () => {
     <>
       <GameContainer>
         <Routes>
-          <Route exact path='/' element={<Home />} />
+          <Route exact path='/CanvasGames' element={<Home />} />
           <Route exact path='/Ballsurvival' element={<BallsCanvasRules />} />
           <Route exact path='/Pong' element={<PongRules />} />
           <Route exact path='/Breakout' element={<BreakoutRules />} />
@@ -62,7 +62,7 @@ const Main = () => {
               refreshPage()
             }}
           >
-            <Link to='/'>Back To Home</Link>
+            <Link to='/CanvasGames'>Back To Home</Link>
           </NavItem>
         </NavArea>
       </NavContainer>
